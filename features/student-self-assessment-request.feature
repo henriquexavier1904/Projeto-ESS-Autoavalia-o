@@ -19,3 +19,21 @@ Feature: Student self-assessment request
     And I do not see "Bruno Tavares" with a self-assessment request sent today
     And I see "Bruno Tavares" in the list of students with self-assessment sent
     And I see the count "1" of students with self-assessment sent
+
+
+    Scenario: query students with discrepant self-assessment (after feedback)
+    Given the system has the class "ESS 2025.1" with only the goals "Understand requirements concepts", "Specify requirements with quality", "Understand configuration management concepts" and "Write quality tests"
+    And the system has only the students "Bruno Tavares", "Carla Nunes", "Ana Ribeiro" and "Diego Alves" enrolled in "ESS 2025.1"
+    And the system has the concepts "MPA, MPA, MANA, MPA" assigned by the professor to "Bruno Tavares" in "ESS 2025.1" and the self-assessment "MA, MA, MANA, MPA" of "Bruno Tavares" in "ESS 2025.1"
+    And the system has the concepts "MA, MA, MPA, MA" assigned by the professor to "Carla Nunes" in "ESS 2025.1" and the self-assessment "MPA, MPA, MANA, MPA" of "Carla Nunes" in "ESS 2025.1"
+    And the system has the concepts "MA, MPA, MA, MPA" assigned by the professor to "Ana Ribeiro" in "ESS 2025.1" and the self-assessment "MA, MPA, MA, MPA" of "Ana Ribeiro" in "ESS 2025.1"
+    And the system has the concepts "MPA, MPA, MPA, MPA" assigned by the professor to "Diego Alves" in "ESS 2025.1"
+    And the system does not have a self-assessment of "Diego Alves" in "ESS 2025.1"
+    When I request the system for the students with discrepant self-assessment in "ESS 2025.1"
+    Then the system returns the count "1" of students with discrepant self-assessment
+    And the system returns the percentage "33%" of students with discrepant self-assessment
+    And the system returns the list of students with discrepant self-assessment containing only "Bruno Tavares"
+    And the system has the self-assessment "MA, MA, MANA, MPA" of "Bruno Tavares" in "ESS 2025.1"
+    And the system has the self-assessment "MPA, MPA, MANA, MPA" of "Carla Nunes" in "ESS 2025.1"
+    And the system has the self-assessment "MA, MPA, MA, MPA" of "Ana Ribeiro" in "ESS 2025.1"
+    And the system does not have a self-assessment of "Diego Alves" in "ESS 2025.1"
