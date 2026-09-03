@@ -66,3 +66,4 @@ Feature: Student self-assessment request
     When I request self-assessment from the pending students of "ESS 2025.1"
     Then I remain on the "Self-assessment status" page of "ESS 2025.1"
     And I see an error message stating that all pending students have already received a request today
+    And I return to the previous session
