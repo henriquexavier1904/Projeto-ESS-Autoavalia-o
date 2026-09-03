@@ -37,3 +37,22 @@ Feature: Student self-assessment request
     And the system has the self-assessment "MPA, MPA, MANA, MPA" of "Carla Nunes" in "ESS 2025.1"
     And the system has the self-assessment "MA, MPA, MA, MPA" of "Ana Ribeiro" in "ESS 2025.1"
     And the system does not have a self-assessment of "Diego Alves" in "ESS 2025.1"
+
+    Scenario: fail to request self-assessment when there are no pending students
+    Given I am logged in as the professor "Paulo Borba", responsible for the class "ESS 2025.1"
+    And "ESS 2025.1" has only the students "Bruno Tavares", "Ana Ribeiro" and "Diego Alves"
+    And all students in "ESS 2025.1" have a self-assessment registered
+    And I am on the "Self-assessment status" page of "ESS 2025.1"
+    When I request self-assessment from the pending students of "ESS 2025.1"
+    Then I remain on the "Self-assessment status" page of "ESS 2025.1"
+    And I see an error message stating there are no pending students in "ESS 2025.1"
+
+  Scenario: fail to request self-assessment again from students already requested today
+    Given I am logged in as the professor "Paulo Borba", responsible for the class "ESS 2025.1"
+    And "ESS 2025.1" has only the students "Bruno Tavares", "Ana Ribeiro" and "Diego Alves"
+    And "Ana Ribeiro" and "Diego Alves" do not have a self-assessment registered in "ESS 2025.1"
+    And "Ana Ribeiro" and "Diego Alves" have already received a self-assessment request today
+    And I am on the "Self-assessment status" page of "ESS 2025.1"
+    When I request self-assessment from the pending students of "ESS 2025.1"
+    Then I remain on the "Self-assessment status" page of "ESS 2025.1"
+    And I see an error message stating that all pending students have already received a request today
