@@ -95,3 +95,13 @@ Feature: Student self-assessment request
     Given I am logged in as the professor "Paulo Borba", responsible for the class "ESS 2025.1"
     Then I remain on the "Self-assessment status" page of "ESS 2025.1"
     And I see an error message stating that all pending students have already received a request today
+
+
+  Scenario: Professor exports the self-assessment status list
+    Given I am logged in as professor "Ana Souza"
+    And I am on the self-assessment monitoring page of the course "Engenharia de Software"
+    And there are 3 students with self-assessment sent and 1 pending
+    When I click on "Export list"
+    Then I see the message "List exported successfully"
+    And I see the file "self-assessment-status.csv" available for download
+    And I see the count "3" of exported students in the file
