@@ -30,3 +30,10 @@ And o aluno "Maria" possui nota de autoavaliação cadastrada, mas não possui n
 When eu acesso a página de discrepâncias da turma
 Then devo ver uma mensagem indicando que a discrepância do aluno "Maria" não pôde ser calculada
 And o aluno "Maria" não deve ser contabilizado na quantidade de alunos discrepantes
+
+Scenario: aluno com diferença de nota exatamente igual ao limite não é considerado discrepante
+Given que estou na página de discrepâncias da turma "Turma D"
+And o limite de discrepância definido é "2.0"
+And o aluno "João" possui diferença entre a nota de autoavaliação e a nota do professor igual a "2.0"
+When eu acesso a página de discrepâncias da turma
+Then o aluno "João" não deve aparecer na lista de alunos discrepantes
