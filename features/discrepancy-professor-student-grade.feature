@@ -50,6 +50,12 @@ And a turma "Turma E" possui os alunos discrepantes:
 When eu ordeno a lista de alunos discrepantes por diferença de nota decrescente
 Then devo ver os alunos discrepantes na ordem "Carlos", "Beatriz", "Rafael"
 
+Scenario: professor exporta lista de alunos discrepantes em CSV
+Given que estou na página de discrepâncias da turma "Turma F"
+And a turma "Turma F" possui alunos discrepantes
+When eu clico em "Exportar para CSV"
+Then devo receber um arquivo CSV contendo os alunos discrepantes e suas diferenças de nota
+
 Scenario: professor recebe notificação de novos alunos discrepantes após atualização de notas
 Given que estou cadastrado para receber notificações da turma "Turma H"
 And um novo aluno da turma "Turma H" passa a ter diferença de nota acima do limite definido
