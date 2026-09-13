@@ -49,3 +49,9 @@ And a turma "Turma E" possui os alunos discrepantes:
   | Rafael  | 1.5                |
 When eu ordeno a lista de alunos discrepantes por diferença de nota decrescente
 Then devo ver os alunos discrepantes na ordem "Carlos", "Beatriz", "Rafael"
+
+Scenario: professor recebe notificação de novos alunos discrepantes após atualização de notas
+Given que estou cadastrado para receber notificações da turma "Turma H"
+And um novo aluno da turma "Turma H" passa a ter diferença de nota acima do limite definido
+When o sistema recalcula as discrepâncias da turma
+Then devo receber uma notificação informando o novo aluno discrepante
