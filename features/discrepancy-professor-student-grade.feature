@@ -17,4 +17,9 @@ And o limite de discrepância definido é "2.0"
 And todos os alunos da turma "Turma B" possuem diferença entre a nota de autoavaliação e a nota do professor menor ou igual a "2.0"
 When eu acesso a página de discrepâncias da turma
 Then devo ver a quantidade de alunos discrepantes igual a "0"
-And devo ver a lista de alunos com discrepâncias vazia
+And devo ver a lista de alunos discrepantes vazia
+
+Scenario: falha ao acessar discrepâncias de turma inexistente
+Given que não existe a turma "Turma Z"
+When eu tento acessar a página de discrepâncias da turma "Turma Z"
+Then devo ver uma mensagem de erro informando que a turma não foi encontrada
