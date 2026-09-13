@@ -23,3 +23,10 @@ Scenario: falha ao acessar discrepâncias de turma inexistente
 Given que não existe a turma "Turma Z"
 When eu tento acessar a página de discrepâncias da turma "Turma Z"
 Then devo ver uma mensagem de erro informando que a turma não foi encontrada
+
+Scenario: falha ao calcular discrepância por falta de nota do professor
+Given que estou na página de discrepâncias da turma "Turma C"
+And o aluno "Maria" possui nota de autoavaliação cadastrada, mas não possui nota do professor cadastrada
+When eu acesso a página de discrepâncias da turma
+Then devo ver uma mensagem indicando que a discrepância do aluno "Maria" não pôde ser calculada
+And o aluno "Maria" não deve ser contabilizado na quantidade de alunos discrepantes
