@@ -1,0 +1,20 @@
+Feature: Como professor
+         Eu quero visualizar as discrepâncias entre as notas de autoavaliação dos alunos e as notas que atribuí
+         Para identificar rapidamente quais alunos avaliaram a si mesmos de forma muito diferente da minha avaliação
+
+Scenario: listar alunos com discrepância acima do limite definido
+Given que estou na página de discrepâncias da turma "Turma A"
+And o limite de discrepância definido é "1.5"
+And a turma "Turma A" possui alunos com nota de autoavaliação e nota do professor cadastradas
+When eu acesso a página de discrepâncias da turma
+Then devo ver apenas os alunos cuja diferença entre a nota de autoavaliação e a nota do professor seja maior que "2.0"
+And devo ver a quantidade de alunos discrepantes
+And devo ver o percentual de alunos discrepantes em relação ao total de alunos da turma
+
+Scenario: nenhum aluno discrepante na turma
+Given que estou na página de discrepâncias da turma "Turma B"
+And o limite de discrepância definido é "2.0"
+And todos os alunos da turma "Turma B" possuem diferença entre a nota de autoavaliação e a nota do professor menor ou igual a "2.0"
+When eu acesso a página de discrepâncias da turma
+Then devo ver a quantidade de alunos discrepantes igual a "0"
+And devo ver a lista de alunos com discrepâncias vazia
