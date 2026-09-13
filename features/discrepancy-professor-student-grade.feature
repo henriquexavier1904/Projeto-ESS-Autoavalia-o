@@ -56,6 +56,12 @@ And a turma "Turma F" possui alunos discrepantes
 When eu clico em "Exportar para CSV"
 Then devo receber um arquivo CSV contendo os alunos discrepantes e suas diferenças de nota
 
+Scenario: professor visualiza gráfico de distribuição das discrepâncias da turma
+Given que estou na página de discrepâncias da turma "Turma G"
+And a turma "Turma G" possui alunos com diferentes níveis de discrepância
+When eu acesso a aba "Distribuição de Discrepâncias"
+Then devo ver um gráfico com a quantidade de alunos agrupados por faixa de diferença de nota
+
 Scenario: professor recebe notificação de novos alunos discrepantes após atualização de notas
 Given que estou cadastrado para receber notificações da turma "Turma H"
 And um novo aluno da turma "Turma H" passa a ter diferença de nota acima do limite definido
