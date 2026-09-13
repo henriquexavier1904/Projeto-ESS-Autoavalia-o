@@ -41,6 +41,11 @@ Then o aluno "João" não deve aparecer na lista de alunos discrepantes
 
 Scenario: professor filtra alunos discrepantes por ordem decrescente de diferença de nota
 Given que estou na página de discrepâncias da turma "Turma E"
-And a turma "Turma E" possui múltiplos alunos discrepantes com diferenças de nota distintas
+And o limite de discrepância definido é "1.0"
+And a turma "Turma E" possui os alunos discrepantes:
+  | aluno   | diferença de nota |
+  | Carlos  | 4.0                |
+  | Beatriz | 3.5                |
+  | Rafael  | 1.5                |
 When eu ordeno a lista de alunos discrepantes por diferença de nota decrescente
-Then devo ver os alunos discrepantes listados do maior para o menor valor de diferença de nota
+Then devo ver os alunos discrepantes na ordem "Carlos", "Beatriz", "Rafael"
