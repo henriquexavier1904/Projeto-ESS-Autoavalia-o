@@ -37,3 +37,9 @@ And o limite de discrepância definido é "2.0"
 And o aluno "João" possui diferença entre a nota de autoavaliação e a nota do professor igual a "2.0"
 When eu acesso a página de discrepâncias da turma
 Then o aluno "João" não deve aparecer na lista de alunos discrepantes
+
+Scenario: professor filtra alunos discrepantes por ordem decrescente de diferença de nota
+Given que estou na página de discrepâncias da turma "Turma E"
+And a turma "Turma E" possui múltiplos alunos discrepantes com diferenças de nota distintas
+When eu ordeno a lista de alunos discrepantes por diferença de nota decrescente
+Then devo ver os alunos discrepantes listados do maior para o menor valor de diferença de nota
