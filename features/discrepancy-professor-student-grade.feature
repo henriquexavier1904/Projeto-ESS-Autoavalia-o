@@ -30,3 +30,4 @@ And o aluno "Maria" possui nota de autoavaliação cadastrada, mas não possui n
 When eu acesso a página de discrepâncias da turma
 Then devo ver uma mensagem indicando que a discrepância do aluno "Maria" não pôde ser calculada
 And o aluno "Maria" não deve ser contabilizado na quantidade de alunos discrepantes
+And devo ver uma sugestão para que eu cadastre a nota pendente do aluno "Maria"
