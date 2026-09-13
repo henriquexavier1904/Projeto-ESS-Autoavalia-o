@@ -67,3 +67,11 @@ Given que estou cadastrado para receber notificações da turma "Turma H"
 And um novo aluno da turma "Turma H" passa a ter diferença de nota acima do limite definido
 When o sistema recalcula as discrepâncias da turma
 Then devo receber uma notificação informando o novo aluno discrepante
+
+Scenario: professor altera o limite de discrepância da turma
+Given que estou na página de discrepâncias da turma "Turma I"
+And o limite de discrepância definido é "2.0"
+And o aluno "Pedro" possui diferença entre a nota de autoavaliação e a nota do professor igual a "1.5"
+When eu altero o limite de discrepância para "1.0"
+Then a lista de alunos discrepantes deve ser recalculada com base no novo limite de "1.0"
+And o aluno "Pedro" deve passar a aparecer na lista de alunos discrepantes
